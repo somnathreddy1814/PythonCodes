@@ -1,40 +1,18 @@
-from typing import List
-
-
-
-
-class meeting:
-    def __init__(self, start, end, pos):
-        self.start = start
-        self.end = end
-        self.pos = pos
-
-
-
-
-class Solution:
-
-
-    def maxMeetings(self, s: List[int], e: List[int], n: int) -> None:
-        meet = [meeting(s[i], e[i], i + 1) for i in range(n)]
-        sorted(meet, key=lambda x: (x.end, x.pos))
-        answer = []
-        limit = meet[0].end
-        answer.append(meet[0].pos)
-        for i in range(1, n):
-            if meet[i].start > limit:
-                limit = meet[i].end
-                answer.append(meet[i].pos)
-        print("The order in which the meetings will be performed is ")
-        for i in answer:
-            print(i, end=" ")
+def countPlatforms(n, arr, dep):
+    ans = 1  # final value
+    for i in range(n):
+        count = 1  # count of overlapping interval of only this iteration
+        for j in range(i+1, n):
+            if (arr[i] >= arr[j] and arr[i] <= dep[j]) or (arr[j] >= arr[i] and arr[j] <= dep[i]):
+                count += 1
+        ans = max(ans, count)  # updating the value
+    return ans
 
 
 
 
 if __name__ == "__main__":
-    obj = Solution()
-    n = 6
-    start = [1, 3, 0, 5, 8, 5]
-    end = [2, 4, 5, 7, 9, 9]
-    obj.maxMeetings(start, end, n)
+    arr = [900, 945, 955, 1100, 1500, 1800]
+    dep = [920, 1200, 1130, 1150, 1900, 2000]
+    n = len(dep)
+    print("Minimum number of Platforms required", countPlatforms(n, arr, dep))
