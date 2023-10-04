@@ -1,9 +1,12 @@
 def fib(n):
     if n<=1:
-        return [n]
-    else:
-        return [fib(n)+fib(n-1)]
+        return n
+    lst=fib(n-1)
+    slst=fib(n-2)
+    return lst+slst
+     
+
 
 if __name__=="__main__":
-    n=5
+    n=2
     print(fib(n))
