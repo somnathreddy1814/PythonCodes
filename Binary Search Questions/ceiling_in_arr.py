@@ -5,6 +5,8 @@ target=15
 ans-->16
 '''
 def ceiling(arr,target):
+    if target>arr[len(arr)-1]:
+        return -1
     low=0
     high=len(arr)-1
     res=-1
@@ -24,5 +26,5 @@ def ceiling(arr,target):
     
 if __name__=="__main__":
     arr=[2,3,5,9,14,16,18]
-    target=17
+    target=19
     print(ceiling(arr,target))
